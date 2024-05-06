@@ -6,7 +6,7 @@ https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-
 - [ ] Migrate non-KMP libraries to KMP
     - [x] Migrate Gson to kotlinx.serialization
     - [x] Migrate Retrofit to Ktor
-    - [ ] Migrate Glide to Coil
+    - [x] Migrate Glide to Coil
     - [ ] Migrate Room to SQLDelight
     - [ ] Migrate Dagger to Koin
 - [ ] Migrate `res` files with Multiplatform Resources
