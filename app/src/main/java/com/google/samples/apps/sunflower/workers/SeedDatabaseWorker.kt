@@ -38,7 +38,7 @@ class SeedDatabaseWorker(
             val filename = inputData.getString(KEY_FILENAME)
             if (filename != null) {
                 applicationContext.assets.open(filename).use { inputStream ->
-                val plantList: List<Plant> = Json.decodeFromStream(inputStream)
+                    val plantList: List<Plant> = Json.decodeFromStream(inputStream)
 
                     val database = AppDatabase.getInstance(applicationContext)
                     database.plantDao().upsertAll(plantList)
