@@ -7,7 +7,6 @@ https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-
     - [x] Migrate Gson to kotlinx.serialization
     - [x] Migrate Retrofit to Ktor
     - [x] Migrate Glide to Coil
-    - [ ] Migrate Room to SQLDelight
     - [ ] Migrate Dagger to Koin
 - [ ] Migrate `res` files with Multiplatform Resources
 - [ ] Rename `:app` to `:androidApp`
