@@ -8,6 +8,7 @@ https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-
     - [x] Migrate Retrofit to Ktor
     - [x] Migrate Glide to Coil
     - [ ] Migrate Dagger to Koin
+- [ ] Update AndroidX libraries to KMP supported versions
 - [ ] Migrate `res` files with Multiplatform Resources
 - [ ] Rename `:app` to `:androidApp`
 - [ ] Create `:shared` module
