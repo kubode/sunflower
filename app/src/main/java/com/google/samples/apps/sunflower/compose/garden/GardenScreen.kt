@@ -47,8 +47,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
+import coil3.compose.AsyncImage
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.GardenPlanting
 import com.google.samples.apps.sunflower.data.Plant
@@ -115,9 +114,6 @@ private fun GardenList(
     }
 }
 
-@OptIn(
-    ExperimentalGlideComposeApi::class
-)
 @Composable
 private fun GardenListItem(
     plant: PlantAndGardenPlantings,
@@ -139,7 +135,7 @@ private fun GardenListItem(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
     ) {
         Column(Modifier.fillMaxWidth()) {
-            GlideImage(
+            AsyncImage(
                 model = vm.imageUrl,
                 contentDescription = plant.plant.description,
                 Modifier

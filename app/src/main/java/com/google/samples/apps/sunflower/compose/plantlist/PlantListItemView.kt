@@ -32,8 +32,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
+import coil3.compose.AsyncImage
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.UnsplashPhoto
@@ -48,7 +47,6 @@ fun PhotoListItem(photo: UnsplashPhoto, onClick: () -> Unit) {
     ImageListItem(name = photo.user.name, imageUrl = photo.urls.small, onClick = onClick)
 }
 
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun ImageListItem(name: String, imageUrl: String, onClick: () -> Unit) {
     Card(
@@ -59,7 +57,7 @@ fun ImageListItem(name: String, imageUrl: String, onClick: () -> Unit) {
             .padding(bottom = dimensionResource(id = R.dimen.card_bottom_margin))
     ) {
         Column(Modifier.fillMaxWidth()) {
-            GlideImage(
+            AsyncImage(
                 model = imageUrl,
                 contentDescription = stringResource(R.string.a11y_plant_item_image),
                 Modifier

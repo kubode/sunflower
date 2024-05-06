@@ -65,6 +65,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
@@ -82,12 +83,7 @@ import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
+import coil3.compose.AsyncImage
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
 import com.google.samples.apps.sunflower.compose.utils.TextSnackbarContainer
@@ -266,7 +262,6 @@ private fun PlantDetailsContent(
     }
 }
 
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 private fun PlantImage(
     imageUrl: String,
@@ -274,51 +269,19 @@ private fun PlantImage(
     modifier: Modifier = Modifier,
     placeholderColor: Color = MaterialTheme.colorScheme.onSurface.copy(0.2f)
 ) {
-    var isLoading by remember { mutableStateOf(true) }
     Box(
         modifier
             .fillMaxWidth()
             .height(imageHeight)
     ) {
-        if (isLoading) {
-            // TODO: Update this implementation once Glide releases a version
-            // that contains this feature: https://github.com/bumptech/glide/pull/4934
-            Box(
-                Modifier
-                    .fillMaxSize()
-                    .background(placeholderColor)
-            )
-        }
-        GlideImage(
+        AsyncImage(
             model = imageUrl,
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize(),
             contentScale = ContentScale.Crop,
-        ) {
-            it.addListener(object : RequestListener<Drawable> {
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<Drawable>,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    isLoading = false
-                    return false
-                }
-
-                override fun onResourceReady(
-                    resource: Drawable,
-                    model: Any,
-                    target: Target<Drawable>?,
-                    dataSource: DataSource,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    isLoading = false
-                    return false
-                }
-            })
-        }
+            placeholder = ColorPainter(placeholderColor),
+        )
     }
 }
 
