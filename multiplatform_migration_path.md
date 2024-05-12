@@ -3,11 +3,11 @@ https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-
 
 ## Migration path
 - [x] Migrate XML views to Compose
-- [ ] Migrate non-KMP libraries to KMP
+- [x] Migrate non-KMP libraries to KMP
     - [x] Migrate Gson to kotlinx.serialization
     - [x] Migrate Retrofit to Ktor
     - [x] Migrate Glide to Coil
-    - [ ] Migrate Dagger to Koin
+    - [x] Migrate Dagger to Koin
 - [ ] Update AndroidX libraries to KMP supported versions
 - [ ] Migrate `res` files with Multiplatform Resources
 - [ ] Rename `:app` to `:androidApp`
