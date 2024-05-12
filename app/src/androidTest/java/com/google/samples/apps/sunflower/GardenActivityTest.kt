@@ -21,29 +21,28 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.printToLog
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.work.Configuration
 import androidx.work.testing.SynchronousExecutor
 import androidx.work.testing.WorkManagerTestInitHelper
-import dagger.hilt.android.testing.HiltAndroidRule
-import dagger.hilt.android.testing.HiltAndroidTest
+import com.google.samples.apps.sunflower.di.DatabaseModule
+import com.google.samples.apps.sunflower.di.NetworkModule
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
+import org.koin.ksp.generated.defaultModule
+import org.koin.ksp.generated.module
 
-@HiltAndroidTest
 class GardenActivityTest {
 
-    private val hiltRule = HiltAndroidRule(this)
+    private val koinTestRule = KoinTestRule(listOf(defaultModule, DatabaseModule().module, NetworkModule().module))
     private val composeTestRule = createAndroidComposeRule<GardenActivity>()
 
     @get:Rule
     val rule: RuleChain = RuleChain
-        .outerRule(hiltRule)
+        .outerRule(koinTestRule)
         .around(composeTestRule)
 
     @Before

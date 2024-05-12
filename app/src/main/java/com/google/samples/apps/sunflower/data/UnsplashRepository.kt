@@ -21,9 +21,10 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.google.samples.apps.sunflower.api.UnsplashService
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
+import org.koin.core.annotation.Singleton
 
-class UnsplashRepository @Inject constructor(private val service: UnsplashService) {
+@Singleton
+class UnsplashRepository(private val service: UnsplashService) {
 
     fun getSearchResultStream(query: String): Flow<PagingData<UnsplashPhoto>> {
         return Pager(

@@ -82,7 +82,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.text.HtmlCompat
-import androidx.hilt.navigation.compose.hiltViewModel
 import coil3.compose.AsyncImage
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.Dimens
@@ -92,6 +91,7 @@ import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ItemPlantDescriptionBinding
 import com.google.samples.apps.sunflower.ui.SunflowerTheme
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
+import org.koin.androidx.compose.koinViewModel
 
 /**
  * As these callbacks are passed in through multiple Composables, to avoid having to name
@@ -106,7 +106,7 @@ data class PlantDetailsCallbacks(
 
 @Composable
 fun PlantDetailsScreen(
-    plantDetailsViewModel: PlantDetailViewModel = hiltViewModel(),
+    plantDetailsViewModel: PlantDetailViewModel = koinViewModel(),
     onBackClick: () -> Unit,
     onShareClick: (String) -> Unit,
     onGalleryClick: (Plant) -> Unit,
@@ -226,8 +226,8 @@ private fun PlantDetailsContent(
                 imageUrl = plant.imageUrl,
                 imageHeight = imageHeight,
                 modifier = Modifier
-                    .constrainAs(image) { top.linkTo(parent.top) }
-                    .alpha(contentAlpha())
+                        .constrainAs(image) { top.linkTo(parent.top) }
+                        .alpha(contentAlpha())
             )
 
             if (!isPlanted) {
@@ -235,14 +235,14 @@ private fun PlantDetailsContent(
                 PlantFab(
                     onFabClick = onFabClick,
                     modifier = Modifier
-                        .constrainAs(fab) {
-                            centerAround(image.bottom)
-                            absoluteRight.linkTo(
-                                parent.absoluteRight,
-                                margin = fabEndMargin
-                            )
-                        }
-                        .alpha(contentAlpha())
+                            .constrainAs(fab) {
+                                centerAround(image.bottom)
+                                absoluteRight.linkTo(
+                                        parent.absoluteRight,
+                                        margin = fabEndMargin
+                                )
+                            }
+                            .alpha(contentAlpha())
                 )
             }
 
@@ -270,9 +270,9 @@ private fun PlantImage(
     placeholderColor: Color = MaterialTheme.colorScheme.onSurface.copy(0.2f)
 ) {
     Box(
-        modifier
-            .fillMaxWidth()
-            .height(imageHeight)
+            modifier
+                    .fillMaxWidth()
+                    .height(imageHeight)
     ) {
         AsyncImage(
             model = imageUrl,
@@ -344,8 +344,8 @@ private fun PlantDetailsToolbar(
     Surface {
         TopAppBar(
             modifier = modifier
-                .statusBarsPadding()
-                .background(color = MaterialTheme.colorScheme.surface),
+                    .statusBarsPadding()
+                    .background(color = MaterialTheme.colorScheme.surface),
             title = {
                 Row {
                     IconButton(
@@ -362,18 +362,18 @@ private fun PlantDetailsToolbar(
                         style = MaterialTheme.typography.titleLarge,
                         // As title in TopAppBar has extra inset on the left, need to do this: b/158829169
                         modifier = Modifier
-                            .weight(1f)
-                            .fillMaxSize()
-                            .wrapContentSize(Alignment.Center)
+                                .weight(1f)
+                                .fillMaxSize()
+                                .wrapContentSize(Alignment.Center)
                     )
                     val shareContentDescription =
                         stringResource(R.string.menu_item_share_plant)
                     IconButton(
                         onShareClick,
-                        Modifier
-                            .align(Alignment.CenterVertically)
-                            // Semantics in parent due to https://issuetracker.google.com/184825850
-                            .semantics { contentDescription = shareContentDescription }
+                            Modifier
+                                    .align(Alignment.CenterVertically)
+                                    // Semantics in parent due to https://issuetracker.google.com/184825850
+                                    .semantics { contentDescription = shareContentDescription }
                     ) {
                         Icon(
                             Icons.Filled.Share,
@@ -394,26 +394,26 @@ private fun PlantHeaderActions(
 ) {
     Row(
         modifier = modifier
-            .fillMaxSize()
-            .systemBarsPadding()
-            .padding(top = Dimens.ToolbarIconPadding),
+                .fillMaxSize()
+                .systemBarsPadding()
+                .padding(top = Dimens.ToolbarIconPadding),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         val iconModifier = Modifier
-            .sizeIn(
-                maxWidth = Dimens.ToolbarIconSize,
-                maxHeight = Dimens.ToolbarIconSize
-            )
-            .background(
-                color = MaterialTheme.colorScheme.surface,
-                shape = CircleShape
-            )
+                .sizeIn(
+                        maxWidth = Dimens.ToolbarIconSize,
+                        maxHeight = Dimens.ToolbarIconSize
+                )
+                .background(
+                        color = MaterialTheme.colorScheme.surface,
+                        shape = CircleShape
+                )
 
         IconButton(
             onClick = onBackClick,
             modifier = Modifier
-                .padding(start = Dimens.ToolbarIconPadding)
-                .then(iconModifier)
+                    .padding(start = Dimens.ToolbarIconPadding)
+                    .then(iconModifier)
         ) {
             Icon(
                 Icons.AutoMirrored.Filled.ArrowBack,
@@ -425,12 +425,12 @@ private fun PlantHeaderActions(
         IconButton(
             onClick = onShareClick,
             modifier = Modifier
-                .padding(end = Dimens.ToolbarIconPadding)
-                .then(iconModifier)
-                // Semantics in parent due to https://issuetracker.google.com/184825850
-                .semantics {
-                    contentDescription = shareContentDescription
-                }
+                    .padding(end = Dimens.ToolbarIconPadding)
+                    .then(iconModifier)
+                    // Semantics in parent due to https://issuetracker.google.com/184825850
+                    .semantics {
+                        contentDescription = shareContentDescription
+                    }
         ) {
             Icon(
                 Icons.Filled.Share,
@@ -456,31 +456,31 @@ private fun PlantInformation(
             text = name,
             style = MaterialTheme.typography.displaySmall,
             modifier = Modifier
-                .padding(
-                    start = Dimens.PaddingSmall,
-                    end = Dimens.PaddingSmall,
-                    bottom = Dimens.PaddingNormal
-                )
-                .align(Alignment.CenterHorizontally)
-                .onGloballyPositioned { onNamePosition(it.positionInWindow().y) }
-                .visible { toolbarState == ToolbarState.HIDDEN }
+                    .padding(
+                            start = Dimens.PaddingSmall,
+                            end = Dimens.PaddingSmall,
+                            bottom = Dimens.PaddingNormal
+                    )
+                    .align(Alignment.CenterHorizontally)
+                    .onGloballyPositioned { onNamePosition(it.positionInWindow().y) }
+                    .visible { toolbarState == ToolbarState.HIDDEN }
         )
         Box(
-            Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(
-                    start = Dimens.PaddingSmall,
-                    end = Dimens.PaddingSmall,
-                    bottom = Dimens.PaddingNormal
-                )
+                Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .padding(
+                                start = Dimens.PaddingSmall,
+                                end = Dimens.PaddingSmall,
+                                bottom = Dimens.PaddingNormal
+                        )
         ) {
             Column(Modifier.fillMaxWidth()) {
                 Text(
                     text = stringResource(id = R.string.watering_needs_prefix),
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
-                        .padding(horizontal = Dimens.PaddingSmall)
-                        .align(Alignment.CenterHorizontally)
+                            .padding(horizontal = Dimens.PaddingSmall)
+                            .align(Alignment.CenterHorizontally)
                 )
 
                 val wateringIntervalText = pluralStringResource(
@@ -497,9 +497,9 @@ private fun PlantInformation(
                 Image(
                     painter = painterResource(id = R.drawable.ic_photo_library),
                     contentDescription = "Gallery Icon",
-                    Modifier
-                        .clickable { onGalleryClick() }
-                        .align(Alignment.CenterEnd)
+                        Modifier
+                                .clickable { onGalleryClick() }
+                                .align(Alignment.CenterEnd)
                 )
             }
         }

@@ -16,11 +16,10 @@
 
 package com.google.samples.apps.sunflower.data
 
-import javax.inject.Inject
-import javax.inject.Singleton
+import org.koin.core.annotation.Singleton
 
 @Singleton
-class GardenPlantingRepository @Inject constructor(
+class GardenPlantingRepository(
     private val gardenPlantingDao: GardenPlantingDao
 ) {
 

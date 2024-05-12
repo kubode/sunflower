@@ -18,7 +18,6 @@ plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.ksp)
-  alias(libs.plugins.hilt)
   alias(libs.plugins.kotlinx.serialization)
 }
 
@@ -38,11 +37,6 @@ android {
 
     // Consult the README on instructions for setting up Unsplash API key
     buildConfigField("String", "UNSPLASH_ACCESS_KEY", "\"" + getUnsplashAccess() + "\"")
-    javaCompileOptions {
-      annotationProcessorOptions {
-        arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
-      }
-    }
   }
   buildTypes {
     release {
@@ -111,7 +105,7 @@ androidComponents {
 
 dependencies {
   ksp(libs.androidx.room.compiler)
-  ksp(libs.hilt.android.compiler)
+  ksp(libs.koin.ksp.compiler)
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.livedata.ktx)
   implementation(libs.androidx.lifecycle.viewmodel.ktx)
@@ -123,14 +117,15 @@ dependencies {
   implementation(libs.okhttp3.logging.interceptor)
   implementation(libs.kotlinx.coroutines.android)
   implementation(libs.kotlinx.coroutines.core)
-  implementation(libs.hilt.android)
-  implementation(libs.hilt.navigation.compose)
   implementation(libs.androidx.profileinstaller)
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.ktor.client.cio)
   implementation(libs.ktor.client.logging)
   implementation(libs.ktor.client.content.negotiation)
   implementation(libs.ktor.serialization.kotlinx.json)
+  implementation(libs.koin.android)
+  implementation(libs.koin.androidx.compose)
+  implementation(libs.koin.annotations)
 
   // Compose
   implementation(platform(libs.androidx.compose.bom))
@@ -152,7 +147,7 @@ dependencies {
 
   // Testing dependencies
   debugImplementation(libs.androidx.monitor)
-  kspAndroidTest(libs.hilt.android.compiler)
+  kspAndroidTest(libs.koin.ksp.compiler)
   androidTestImplementation(platform(libs.androidx.compose.bom))
   androidTestImplementation(libs.androidx.arch.core.testing)
   androidTestImplementation(libs.androidx.espresso.contrib)
@@ -163,7 +158,6 @@ dependencies {
   androidTestImplementation(libs.androidx.work.testing)
   androidTestImplementation(libs.androidx.compose.ui.test.junit4)
   androidTestImplementation(libs.guava)
-  androidTestImplementation(libs.hilt.android.testing)
   androidTestImplementation(libs.accessibility.test.framework)
   androidTestImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.junit)

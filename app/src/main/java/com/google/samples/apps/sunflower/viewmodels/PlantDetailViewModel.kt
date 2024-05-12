@@ -25,15 +25,14 @@ import androidx.lifecycle.viewModelScope
 import com.google.samples.apps.sunflower.BuildConfig
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import org.koin.android.annotation.KoinViewModel
 
 /**
  * The ViewModel used in [PlantDetailsScreen].
  */
-@HiltViewModel
-class PlantDetailViewModel @Inject constructor(
+@KoinViewModel
+class PlantDetailViewModel(
     savedStateHandle: SavedStateHandle,
     plantRepository: PlantRepository,
     private val gardenPlantingRepository: GardenPlantingRepository,

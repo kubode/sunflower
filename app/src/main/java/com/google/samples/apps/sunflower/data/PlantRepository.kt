@@ -16,8 +16,7 @@
 
 package com.google.samples.apps.sunflower.data
 
-import javax.inject.Inject
-import javax.inject.Singleton
+import org.koin.core.annotation.Singleton
 
 /**
  * Repository module for handling data operations.
@@ -26,7 +25,7 @@ import javax.inject.Singleton
  * query execution off of the main thread.
  */
 @Singleton
-class PlantRepository @Inject constructor(private val plantDao: PlantDao) {
+class PlantRepository(private val plantDao: PlantDao) {
 
     fun getPlants() = plantDao.getPlants()
 

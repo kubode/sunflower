@@ -23,16 +23,15 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.google.samples.apps.sunflower.data.UnsplashPhoto
 import com.google.samples.apps.sunflower.data.UnsplashRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import org.koin.android.annotation.KoinViewModel
 
-@HiltViewModel
-class GalleryViewModel @Inject constructor(
+@KoinViewModel
+class GalleryViewModel(
     savedStateHandle: SavedStateHandle,
     private val repository: UnsplashRepository
 ) : ViewModel() {

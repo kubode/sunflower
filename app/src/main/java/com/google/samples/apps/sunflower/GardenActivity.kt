@@ -22,9 +22,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.google.samples.apps.sunflower.compose.SunflowerApp
 import com.google.samples.apps.sunflower.ui.SunflowerTheme
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.compose.KoinContext
 
-@AndroidEntryPoint
 class GardenActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +32,10 @@ class GardenActivity : ComponentActivity() {
         // Displaying edge-to-edge
         enableEdgeToEdge()
         setContent {
-            SunflowerTheme {
-                SunflowerApp()
+            KoinContext {
+                SunflowerTheme {
+                    SunflowerApp()
+                }
             }
         }
         
