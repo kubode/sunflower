@@ -157,7 +157,6 @@ dependencies {
   androidTestImplementation(libs.androidx.test.uiautomator)
   androidTestImplementation(libs.androidx.work.testing)
   androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-  androidTestImplementation(libs.guava)
   androidTestImplementation(libs.accessibility.test.framework)
   androidTestImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.junit)

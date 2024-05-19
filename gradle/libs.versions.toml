@@ -28,10 +28,8 @@ constraintLayoutCompose = "1.0.1"
 coreTesting = "2.2.0"
 coroutines = "1.8.0"
 espresso = "3.5.1"
-glide = "1.0.0-beta01"
 gradle = "7.2.0"
 gradle-versions = "0.51.0"
-guava = "33.1.0-jre"
 junit = "4.13.2"
 kotlin = "1.9.23"
 ksp = "1.9.23-1.0.20"
@@ -100,8 +98,6 @@ androidx-test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "t
 androidx-test-uiautomator = { module = "androidx.test.uiautomator:uiautomator", version.ref = "uiAutomator" }
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
 androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "work" }
-glide = { module = "com.github.bumptech.glide:compose", version.ref = "glide" }
-guava = { module = "com.google.guava:guava", version.ref = "guava" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
