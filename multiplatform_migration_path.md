@@ -9,9 +9,10 @@ https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-
     - [x] Migrate Glide to Coil 718000103a8f665339f4898a62c331229304947d...ba6f923f0687830b344545c95a314a5a4b4e0056
     - [x] Migrate Dagger to Koin edf3b1da66016bc0c59a17a157b5a6b24fb29831...15ddae1bf7b7cf80f0d27d3332b6187ade174a94
 - [x] Update AndroidX libraries to KMP supported versions 87dfcc3806853328b91f8375b17e38b46ab83888
-- [x] Migrate `:app` to Multiplatform project
+- [x] Migrate `:app` to Multiplatform project f890cce01644a25e6b31aefa26324ae3cc4c9993
     - [x] Apply `kotlin-multiplatform` plugin with fixing the dependencies
     - [x] Rename all `java` directories to `kotlin`
+- [ ] Migrate `:app` to Compose Multiplatform
 - [ ] Migrate `res` files with Multiplatform Resources
     - [Limitations](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-images-resources.html)
 - [ ] Rename `:app` to `:androidApp`
