@@ -30,6 +30,10 @@ import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.gallery.GalleryScreen
 import com.google.samples.apps.sunflower.compose.home.HomeScreen
 import com.google.samples.apps.sunflower.compose.plantdetail.PlantDetailsScreen
+import kotlinx.coroutines.runBlocking
+import org.jetbrains.compose.resources.getString
+import sunflower.app.generated.resources.Res
+import sunflower.app.generated.resources.share_text_plant
 
 @Composable
 fun SunflowerApp() {
@@ -94,7 +98,7 @@ fun SunFlowerNavHost(
 // Helper function for calling a share functionality.
 // Should be used when user presses a share button/menu item.
 private fun createShareIntent(activity: Activity, plantName: String) {
-    val shareText = activity.getString(R.string.share_text_plant, plantName)
+    val shareText = runBlocking { getString(Res.string.share_text_plant, plantName) }
     val shareIntent = ShareCompat.IntentBuilder(activity)
         .setText(shareText)
         .setType("text/plain")

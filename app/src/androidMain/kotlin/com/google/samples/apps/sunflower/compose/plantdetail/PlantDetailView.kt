@@ -68,9 +68,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.pluralStringResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -89,7 +86,18 @@ import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.ItemPlantDescriptionBinding
 import com.google.samples.apps.sunflower.ui.SunflowerTheme
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.pluralStringResource
+import org.jetbrains.compose.resources.stringResource
 import org.koin.androidx.compose.koinViewModel
+import sunflower.app.generated.resources.Res
+import sunflower.app.generated.resources.a11y_back
+import sunflower.app.generated.resources.add_plant
+import sunflower.app.generated.resources.added_plant_to_garden
+import sunflower.app.generated.resources.ic_photo_library
+import sunflower.app.generated.resources.menu_item_share_plant
+import sunflower.app.generated.resources.watering_needs_prefix
+import sunflower.app.generated.resources.watering_needs_suffix
 
 /**
  * As these callbacks are passed in through multiple Composables, to avoid having to name
@@ -116,7 +124,7 @@ fun PlantDetailsScreen(
     if (plant != null) {
         Surface {
             TextSnackbarContainer(
-                snackbarText = stringResource(R.string.added_plant_to_garden),
+                snackbarText = stringResource(Res.string.added_plant_to_garden),
                 showSnackbar = showSnackbar,
                 onDismissSnackbar = { plantDetailsViewModel.dismissSnackbar() }
             ) {
@@ -288,7 +296,7 @@ private fun PlantFab(
     onFabClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val addPlantContentDescription = stringResource(R.string.add_plant)
+    val addPlantContentDescription = stringResource(Res.string.add_plant)
     FloatingActionButton(
         onClick = onFabClick,
         shape = MaterialTheme.shapes.small,
@@ -352,7 +360,7 @@ private fun PlantDetailsToolbar(
                     ) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(id = R.string.a11y_back)
+                            contentDescription = stringResource(Res.string.a11y_back)
                         )
                     }
                     Text(
@@ -365,7 +373,7 @@ private fun PlantDetailsToolbar(
                                 .wrapContentSize(Alignment.Center)
                     )
                     val shareContentDescription =
-                        stringResource(R.string.menu_item_share_plant)
+                        stringResource(Res.string.menu_item_share_plant)
                     IconButton(
                         onShareClick,
                             Modifier
@@ -415,11 +423,11 @@ private fun PlantHeaderActions(
         ) {
             Icon(
                 Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = stringResource(id = R.string.a11y_back)
+                contentDescription = stringResource(Res.string.a11y_back)
             )
         }
         val shareContentDescription =
-            stringResource(R.string.menu_item_share_plant)
+            stringResource(Res.string.menu_item_share_plant)
         IconButton(
             onClick = onShareClick,
             modifier = Modifier
@@ -474,7 +482,7 @@ private fun PlantInformation(
         ) {
             Column(Modifier.fillMaxWidth()) {
                 Text(
-                    text = stringResource(id = R.string.watering_needs_prefix),
+                    text = stringResource(Res.string.watering_needs_prefix),
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
                             .padding(horizontal = Dimens.PaddingSmall)
@@ -482,7 +490,7 @@ private fun PlantInformation(
                 )
 
                 val wateringIntervalText = pluralStringResource(
-                    R.plurals.watering_needs_suffix, wateringInterval, wateringInterval
+                    Res.plurals.watering_needs_suffix, wateringInterval, wateringInterval
                 )
 
                 Text(
@@ -493,7 +501,7 @@ private fun PlantInformation(
             }
             if (hasValidUnsplashKey) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_photo_library),
+                    painter = painterResource(Res.drawable.ic_photo_library),
                     contentDescription = "Gallery Icon",
                         Modifier
                                 .clickable { onGalleryClick() }

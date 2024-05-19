@@ -38,7 +38,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
@@ -55,7 +54,10 @@ import com.google.samples.apps.sunflower.data.UnsplashUser
 import com.google.samples.apps.sunflower.viewmodels.GalleryViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
+import org.jetbrains.compose.resources.stringResource
 import org.koin.androidx.compose.koinViewModel
+import sunflower.app.generated.resources.Res
+import sunflower.app.generated.resources.gallery_title
 
 @Composable
 fun GalleryScreen(
@@ -138,7 +140,7 @@ private fun GalleryTopBar(
 ) {
     TopAppBar(
         title = {
-            Text(stringResource(id = R.string.gallery_title))
+            Text(stringResource(Res.string.gallery_title))
         },
         modifier = modifier.statusBarsPadding(),
         navigationIcon = {

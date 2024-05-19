@@ -35,6 +35,7 @@ kotlin {
         implementation(compose.material3)
         implementation(compose.uiTooling)
         implementation(compose.preview)
+        implementation(compose.components.resources)
       }
     }
     androidMain {

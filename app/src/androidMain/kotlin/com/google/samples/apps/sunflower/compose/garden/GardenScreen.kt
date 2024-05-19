@@ -41,8 +41,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.pluralStringResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
@@ -54,7 +52,15 @@ import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.ui.SunflowerTheme
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel
+import org.jetbrains.compose.resources.pluralStringResource
+import org.jetbrains.compose.resources.stringResource
 import org.koin.androidx.compose.koinViewModel
+import sunflower.app.generated.resources.Res
+import sunflower.app.generated.resources.add_plant
+import sunflower.app.generated.resources.garden_empty
+import sunflower.app.generated.resources.plant_date_header
+import sunflower.app.generated.resources.watered_date_header
+import sunflower.app.generated.resources.watering_next
 import java.util.Calendar
 
 @Composable
@@ -155,7 +161,7 @@ private fun GardenListItem(
 
             // Planted date
             Text(
-                text = stringResource(id = R.string.plant_date_header),
+                text = stringResource(Res.string.plant_date_header),
                 Modifier.align(Alignment.CenterHorizontally),
                 style = MaterialTheme.typography.titleSmall
             )
@@ -167,7 +173,7 @@ private fun GardenListItem(
 
             // Last Watered
             Text(
-                text = stringResource(id = R.string.watered_date_header),
+                text = stringResource(Res.string.watered_date_header),
                 Modifier
                     .align(Alignment.CenterHorizontally)
                     .padding(top = marginNormal),
@@ -180,8 +186,8 @@ private fun GardenListItem(
             )
             Text(
                 text = pluralStringResource(
-                    id = R.plurals.watering_next,
-                    count = vm.wateringInterval,
+                    resource = Res.plurals.watering_next,
+                    quantity = vm.wateringInterval,
                     vm.wateringInterval
                 ),
                 Modifier
@@ -204,7 +210,7 @@ private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier = Modifi
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = stringResource(id = R.string.garden_empty),
+            text = stringResource(Res.string.garden_empty),
             style = MaterialTheme.typography.headlineSmall
         )
         Button(
@@ -212,7 +218,7 @@ private fun EmptyGarden(onAddPlantClick: () -> Unit, modifier: Modifier = Modifi
             onClick = onAddPlantClick
         ) {
             Text(
-                text = stringResource(id = R.string.add_plant),
+                text = stringResource(Res.string.add_plant),
                 style = MaterialTheme.typography.titleSmall
             )
         }

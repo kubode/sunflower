@@ -30,12 +30,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import coil3.compose.AsyncImage
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.UnsplashPhoto
+import org.jetbrains.compose.resources.stringResource
+import sunflower.app.generated.resources.Res
+import sunflower.app.generated.resources.a11y_plant_item_image
 
 @Composable
 fun PlantListItem(plant: Plant, onClick: () -> Unit) {
@@ -59,7 +61,7 @@ fun ImageListItem(name: String, imageUrl: String, onClick: () -> Unit) {
         Column(Modifier.fillMaxWidth()) {
             AsyncImage(
                 model = imageUrl,
-                contentDescription = stringResource(R.string.a11y_plant_item_image),
+                contentDescription = stringResource(Res.string.a11y_plant_item_image),
                 Modifier
                     .fillMaxWidth()
                     .height(dimensionResource(id = R.dimen.plant_item_image_height)),

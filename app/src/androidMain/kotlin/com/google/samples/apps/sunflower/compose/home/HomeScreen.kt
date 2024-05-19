@@ -16,8 +16,6 @@
 
 package com.google.samples.apps.sunflower.compose.home
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -45,24 +43,33 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.compose.garden.GardenScreen
 import com.google.samples.apps.sunflower.compose.plantlist.PlantListScreen
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.ui.SunflowerTheme
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import org.koin.androidx.compose.koinViewModel
+import sunflower.app.generated.resources.Res
+import sunflower.app.generated.resources.app_name
+import sunflower.app.generated.resources.ic_filter_list_24dp
+import sunflower.app.generated.resources.ic_my_garden_active
+import sunflower.app.generated.resources.ic_plant_list_active
+import sunflower.app.generated.resources.menu_filter_by_grow_zone
+import sunflower.app.generated.resources.my_garden_title
+import sunflower.app.generated.resources.plant_list_title
 
 enum class SunflowerPage(
-    @StringRes val titleResId: Int,
-    @DrawableRes val drawableResId: Int
+    val titleResId: StringResource,
+    val drawableResId: DrawableResource
 ) {
-    MY_GARDEN(R.string.my_garden_title, R.drawable.ic_my_garden_active),
-    PLANT_LIST(R.string.plant_list_title, R.drawable.ic_plant_list_active)
+    MY_GARDEN(Res.string.my_garden_title, Res.drawable.ic_my_garden_active),
+    PLANT_LIST(Res.string.plant_list_title, Res.drawable.ic_plant_list_active)
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -111,14 +118,14 @@ fun HomePagerScreen(
             selectedTabIndex = pagerState.currentPage
         ) {
             pages.forEachIndexed { index, page ->
-                val title = stringResource(id = page.titleResId)
+                val title = stringResource(page.titleResId)
                 Tab(
                     selected = pagerState.currentPage == index,
                     onClick = { coroutineScope.launch { pagerState.animateScrollToPage(index) } },
                     text = { Text(text = title) },
                     icon = {
                         Icon(
-                            painter = painterResource(id = page.drawableResId),
+                            painter = painterResource(page.drawableResId),
                             contentDescription = title
                         )
                     },
@@ -173,7 +180,7 @@ private fun HomeTopAppBar(
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = stringResource(id = R.string.app_name),
+                    text = stringResource(Res.string.app_name),
                     style = MaterialTheme.typography.displaySmall
                 )
             }
@@ -183,9 +190,9 @@ private fun HomeTopAppBar(
             if (pagerState.currentPage == SunflowerPage.PLANT_LIST.ordinal) {
                 IconButton(onClick = onFilterClick) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_filter_list_24dp),
+                        painter = painterResource(Res.drawable.ic_filter_list_24dp),
                         contentDescription = stringResource(
-                            id = R.string.menu_filter_by_grow_zone
+                            Res.string.menu_filter_by_grow_zone
                         )
                     )
                 }
