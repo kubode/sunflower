@@ -13,7 +13,7 @@ https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-
     - [x] Apply `kotlin-multiplatform` plugin with fixing the dependencies
     - [x] Rename all `java` directories to `kotlin`
 - [ ] Migrate `:app` to Compose Multiplatform
-    - [ ] Remove DataBinding
+    - [ ] Migrate DataBinding to ViewBinding
     - [ ] Migrate LiveData to Flow
 - [ ] Migrate `res` files with Multiplatform Resources
     - [Limitations](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-images-resources.html)
