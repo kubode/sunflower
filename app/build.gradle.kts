@@ -20,6 +20,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.multiplatform)
+  alias(libs.plugins.compose.multiplatform)
   alias(libs.plugins.ksp)
   alias(libs.plugins.kotlinx.serialization)
 }
