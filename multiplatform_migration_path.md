@@ -14,7 +14,7 @@ https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-
     - [x] Rename all `java` directories to `kotlin`
 - [ ] Migrate `:app` to Compose Multiplatform
     - [x] Migrate DataBinding to ViewBinding cccc98e043efaca982b448f2646e6b68ec620b47
-    - [ ] Migrate LiveData to Flow
+    - [x] Migrate LiveData to Flow c63ec96c577f53df12ffd2ae35493f15fde33fe1
 - [ ] Migrate `res` files with Multiplatform Resources
     - [Limitations](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-images-resources.html)
 - [ ] Rename `:app` to `:androidApp`
