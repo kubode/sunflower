@@ -1,3 +1,6 @@
+import org.gradle.configurationcache.extensions.capitalized
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 /*
  * Copyright 2018 Google LLC
  *
@@ -16,9 +19,114 @@
 
 plugins {
   alias(libs.plugins.android.application)
-  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.kotlin.multiplatform)
   alias(libs.plugins.ksp)
   alias(libs.plugins.kotlinx.serialization)
+}
+
+kotlin {
+  androidTarget()
+
+  sourceSets {
+    commonMain {
+      dependencies {
+      }
+    }
+    androidMain {
+      dependencies {
+        implementation(libs.androidx.core.ktx)
+        implementation(libs.androidx.lifecycle.livedata.ktx)
+        implementation(libs.androidx.lifecycle.viewmodel.ktx)
+        implementation(libs.androidx.navigation.compose)
+        implementation(libs.androidx.paging.compose)
+        implementation(libs.androidx.room.ktx)
+        implementation(libs.androidx.work.runtime.ktx)
+        implementation(libs.material)
+        implementation(libs.okhttp3.logging.interceptor)
+        implementation(libs.kotlinx.coroutines.android)
+        implementation(libs.kotlinx.coroutines.core)
+        implementation(libs.androidx.profileinstaller)
+        implementation(libs.kotlinx.serialization.json)
+        implementation(libs.ktor.client.cio)
+        implementation(libs.ktor.client.logging)
+        implementation(libs.ktor.client.content.negotiation)
+        implementation(libs.ktor.serialization.kotlinx.json)
+        implementation(libs.koin.android)
+        implementation(libs.koin.androidx.compose)
+        implementation(libs.koin.annotations)
+
+        // Compose
+        implementation(libs.androidx.activity.compose)
+        implementation(libs.androidx.constraintlayout.compose)
+        implementation(libs.androidx.compose.runtime)
+        implementation(libs.androidx.compose.ui)
+        implementation(libs.androidx.compose.foundation)
+        implementation(libs.androidx.compose.foundation.layout)
+        implementation(libs.androidx.compose.material3)
+        implementation(libs.androidx.compose.ui.viewbinding)
+        implementation(libs.androidx.compose.ui.tooling.preview)
+        implementation(libs.androidx.compose.runtime.livedata)
+        implementation(libs.androidx.lifecycle.viewmodel.compose)
+        implementation(libs.accompanist.systemuicontroller)
+        implementation(libs.coil.compose)
+        implementation(libs.coil.network.ktor)
+      }
+    }
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    invokeWhenCreated("androidDebug") {
+      dependencies {
+        implementation(libs.androidx.compose.ui.tooling)
+        implementation(libs.androidx.monitor)
+      }
+    }
+    getByName("androidUnitTest") {
+      dependencies {
+        implementation(libs.junit)
+      }
+    }
+    getByName("androidInstrumentedTest") {
+      dependencies {
+        implementation(libs.androidx.arch.core.testing)
+        implementation(libs.androidx.espresso.contrib)
+        implementation(libs.androidx.espresso.core)
+        implementation(libs.androidx.espresso.intents)
+        implementation(libs.androidx.test.ext.junit)
+        implementation(libs.androidx.test.uiautomator)
+        implementation(libs.androidx.work.testing)
+        implementation(libs.androidx.compose.ui.test.junit4)
+        implementation(libs.accessibility.test.framework)
+        implementation(libs.kotlinx.coroutines.test)
+      }
+    }
+  }
+
+  targets.all {
+    compilations.all {
+      kotlinOptions {
+        // Enable Coroutines and Flow APIs
+        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlinx.coroutines.FlowPreview"
+      }
+    }
+  }
+  androidTarget().compilations.all {
+    kotlinOptions {
+      // work-runtime-ktx 2.1.0 and above now requires Java 8
+      jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+  }
+}
+
+dependencies {
+  implementation(platform(libs.androidx.compose.bom))
+  androidTestImplementation(platform(libs.androidx.compose.bom))
+  // Add ksp dependencies for each targets
+  kotlin.targets.all {
+    val configurationName = if (name == "metadata") "kspCommonMainMetadata" else "ksp${name.replaceFirstChar(Char::uppercase)}"
+    add(configurationName, libs.androidx.room.compiler)
+    add(configurationName, libs.koin.ksp.compiler)
+  }
+  add("kspAndroidTest", libs.koin.ksp.compiler)
 }
 
 android {
@@ -57,15 +165,6 @@ android {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
   }
-
-  kotlinOptions {
-    // work-runtime-ktx 2.1.0 and above now requires Java 8
-    jvmTarget = JavaVersion.VERSION_17.toString()
-
-    // Enable Coroutines and Flow APIs
-    freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
-    freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlinx.coroutines.FlowPreview"
-  }
   buildFeatures {
     compose = true
     dataBinding = true
@@ -101,65 +200,6 @@ androidComponents {
     // these files for layout inspector to work.
     it.packaging.resources.excludes.add("META-INF/*.version")
   }
-}
-
-dependencies {
-  ksp(libs.androidx.room.compiler)
-  ksp(libs.koin.ksp.compiler)
-  implementation(libs.androidx.core.ktx)
-  implementation(libs.androidx.lifecycle.livedata.ktx)
-  implementation(libs.androidx.lifecycle.viewmodel.ktx)
-  implementation(libs.androidx.navigation.compose)
-  implementation(libs.androidx.paging.compose)
-  implementation(libs.androidx.room.ktx)
-  implementation(libs.androidx.work.runtime.ktx)
-  implementation(libs.material)
-  implementation(libs.okhttp3.logging.interceptor)
-  implementation(libs.kotlinx.coroutines.android)
-  implementation(libs.kotlinx.coroutines.core)
-  implementation(libs.androidx.profileinstaller)
-  implementation(libs.kotlinx.serialization.json)
-  implementation(libs.ktor.client.cio)
-  implementation(libs.ktor.client.logging)
-  implementation(libs.ktor.client.content.negotiation)
-  implementation(libs.ktor.serialization.kotlinx.json)
-  implementation(libs.koin.android)
-  implementation(libs.koin.androidx.compose)
-  implementation(libs.koin.annotations)
-
-  // Compose
-  implementation(platform(libs.androidx.compose.bom))
-  implementation(libs.androidx.activity.compose)
-  implementation(libs.androidx.constraintlayout.compose)
-  implementation(libs.androidx.compose.runtime)
-  implementation(libs.androidx.compose.ui)
-  implementation(libs.androidx.compose.foundation)
-  implementation(libs.androidx.compose.foundation.layout)
-  implementation(libs.androidx.compose.material3)
-  implementation(libs.androidx.compose.ui.viewbinding)
-  implementation(libs.androidx.compose.ui.tooling.preview)
-  implementation(libs.androidx.compose.runtime.livedata)
-  implementation(libs.androidx.lifecycle.viewmodel.compose)
-  implementation(libs.accompanist.systemuicontroller)
-  implementation(libs.coil.compose)
-  implementation(libs.coil.network.ktor)
-  debugImplementation(libs.androidx.compose.ui.tooling)
-
-  // Testing dependencies
-  debugImplementation(libs.androidx.monitor)
-  kspAndroidTest(libs.koin.ksp.compiler)
-  androidTestImplementation(platform(libs.androidx.compose.bom))
-  androidTestImplementation(libs.androidx.arch.core.testing)
-  androidTestImplementation(libs.androidx.espresso.contrib)
-  androidTestImplementation(libs.androidx.espresso.core)
-  androidTestImplementation(libs.androidx.espresso.intents)
-  androidTestImplementation(libs.androidx.test.ext.junit)
-  androidTestImplementation(libs.androidx.test.uiautomator)
-  androidTestImplementation(libs.androidx.work.testing)
-  androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-  androidTestImplementation(libs.accessibility.test.framework)
-  androidTestImplementation(libs.kotlinx.coroutines.test)
-  testImplementation(libs.junit)
 }
 
 fun getUnsplashAccess(): String? {
