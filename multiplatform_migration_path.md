@@ -15,7 +15,7 @@ https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-
 - [x] Migrate `:app` to use Compose Multiplatform d725d1b095a5886e298d95bdc5077008bc630edf
     - [x] Migrate DataBinding to ViewBinding cccc98e043efaca982b448f2646e6b68ec620b47
     - [x] Migrate LiveData to Flow c63ec96c577f53df12ffd2ae35493f15fde33fe1
-- [ ] Migrate `res` files with Multiplatform Resources
+- [x] Migrate `res` files with Multiplatform Resources 1333850dfaa5fd438d329a32182c40a9ef25c827...9aa0101e2dcdce2f358f025d05f893a4e75b3deb
     - [Limitations](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-images-resources.html)
 - [ ] Rename `:app` to `:androidApp`
 - [ ] Create `:shared` module
