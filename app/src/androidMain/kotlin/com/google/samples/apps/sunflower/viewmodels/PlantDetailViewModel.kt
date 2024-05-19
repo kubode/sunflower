@@ -16,15 +16,14 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.samples.apps.sunflower.BuildConfig
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
@@ -41,10 +40,10 @@ class PlantDetailViewModel(
     val plantId: String = savedStateHandle.get<String>(PLANT_ID_SAVED_STATE_KEY)!!
 
     val isPlanted = gardenPlantingRepository.isPlanted(plantId)
-    val plant = plantRepository.getPlant(plantId).asLiveData()
+    val plant = plantRepository.getPlant(plantId)
 
-    private val _showSnackbar = MutableLiveData(false)
-    val showSnackbar: LiveData<Boolean>
+    private val _showSnackbar = MutableStateFlow(false)
+    val showSnackbar: StateFlow<Boolean>
         get() = _showSnackbar
 
     fun addPlantToGarden() {

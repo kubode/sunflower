@@ -22,8 +22,8 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
@@ -42,7 +42,7 @@ fun PlantListScreen(
     modifier: Modifier = Modifier,
     viewModel: PlantListViewModel = koinViewModel(),
 ) {
-    val plants by viewModel.plants.observeAsState(initial = emptyList())
+    val plants by viewModel.plants.collectAsState(initial = emptyList())
     PlantListScreen(plants = plants, modifier, onPlantClick = onPlantClick)
 }
 

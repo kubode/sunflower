@@ -16,7 +16,6 @@
 
 package com.google.samples.apps.sunflower.compose.plantdetail
 
-import android.graphics.drawable.Drawable
 import android.text.method.LinkMovementMethod
 import androidx.annotation.VisibleForTesting
 import androidx.compose.animation.core.Spring
@@ -57,7 +56,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -111,11 +109,11 @@ fun PlantDetailsScreen(
     onShareClick: (String) -> Unit,
     onGalleryClick: (Plant) -> Unit,
 ) {
-    val plant = plantDetailsViewModel.plant.observeAsState().value
+    val plant = plantDetailsViewModel.plant.collectAsState(initial = null).value
     val isPlanted = plantDetailsViewModel.isPlanted.collectAsState(initial = false).value
-    val showSnackbar = plantDetailsViewModel.showSnackbar.observeAsState().value
+    val showSnackbar = plantDetailsViewModel.showSnackbar.collectAsState().value
 
-    if (plant != null && showSnackbar != null) {
+    if (plant != null) {
         Surface {
             TextSnackbarContainer(
                 snackbarText = stringResource(R.string.added_plant_to_garden),
