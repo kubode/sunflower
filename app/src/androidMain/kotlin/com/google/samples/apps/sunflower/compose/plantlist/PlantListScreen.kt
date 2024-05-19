@@ -26,11 +26,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.google.samples.apps.sunflower.R
+import androidx.compose.ui.unit.dp
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -57,8 +56,8 @@ fun PlantListScreen(
         modifier = modifier.testTag("plant_list")
             .imePadding(),
         contentPadding = PaddingValues(
-            horizontal = dimensionResource(id = R.dimen.card_side_margin),
-            vertical = dimensionResource(id = R.dimen.header_margin)
+            horizontal = 12.dp,
+            vertical = 24.dp
         )
     ) {
         items(

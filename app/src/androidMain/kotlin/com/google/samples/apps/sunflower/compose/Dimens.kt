@@ -20,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.google.samples.apps.sunflower.R
 
 /**
  * Class that captures dimens used in Compose code. The dimens that need to be consistent with the
@@ -32,15 +31,15 @@ import com.google.samples.apps.sunflower.R
 object Dimens {
 
     val PaddingSmall: Dp
-        @Composable get() = dimensionResource(R.dimen.margin_small)
+        @Composable get() = 8.dp
 
     val PaddingNormal: Dp
-        @Composable get() = dimensionResource(R.dimen.margin_normal)
+        @Composable get() = 16.dp
 
     val PaddingLarge: Dp = 24.dp
 
     val PlantDetailAppBarHeight: Dp
-        @Composable get() = dimensionResource(R.dimen.plant_detail_app_bar_height)
+        @Composable get() = 278.dp
 
     val ToolbarIconPadding = 12.dp
 

@@ -29,10 +29,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.UnsplashPhoto
 import org.jetbrains.compose.resources.stringResource
@@ -55,8 +54,8 @@ fun ImageListItem(name: String, imageUrl: String, onClick: () -> Unit) {
         onClick = onClick,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
         modifier = Modifier
-            .padding(horizontal = dimensionResource(id = R.dimen.card_side_margin))
-            .padding(bottom = dimensionResource(id = R.dimen.card_bottom_margin))
+            .padding(horizontal = 12.dp)
+            .padding(bottom = 26.dp)
     ) {
         Column(Modifier.fillMaxWidth()) {
             AsyncImage(
@@ -64,7 +63,7 @@ fun ImageListItem(name: String, imageUrl: String, onClick: () -> Unit) {
                 contentDescription = stringResource(Res.string.a11y_plant_item_image),
                 Modifier
                     .fillMaxWidth()
-                    .height(dimensionResource(id = R.dimen.plant_item_image_height)),
+                    .height(95.dp),
                 contentScale = ContentScale.Crop
             )
             Text(
@@ -74,7 +73,7 @@ fun ImageListItem(name: String, imageUrl: String, onClick: () -> Unit) {
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = dimensionResource(id = R.dimen.margin_normal))
+                    .padding(vertical = 16.dp)
                     .wrapContentWidth(Alignment.CenterHorizontally)
             )
         }

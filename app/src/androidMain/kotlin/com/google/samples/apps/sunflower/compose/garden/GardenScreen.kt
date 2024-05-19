@@ -40,12 +40,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.GardenPlanting
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
@@ -107,8 +106,8 @@ private fun GardenList(
         modifier.imePadding(),
         state = gridState,
         contentPadding = PaddingValues(
-            horizontal = dimensionResource(id = R.dimen.card_side_margin),
-            vertical = dimensionResource(id = R.dimen.margin_normal)
+            horizontal = 12.dp,
+            vertical = 16.dp
         )
     ) {
         items(
@@ -128,15 +127,15 @@ private fun GardenListItem(
     val vm = PlantAndGardenPlantingsViewModel(plant)
 
     // Dimensions
-    val cardSideMargin = dimensionResource(id = R.dimen.card_side_margin)
-    val marginNormal = dimensionResource(id = R.dimen.margin_normal)
+    val cardSideMargin = 12.dp
+    val marginNormal = 16.dp
 
     ElevatedCard(
         onClick = { onPlantClick(plant) },
         modifier = Modifier.padding(
             start = cardSideMargin,
             end = cardSideMargin,
-            bottom = dimensionResource(id = R.dimen.card_bottom_margin)
+            bottom = 26.dp
         ),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
     ) {
@@ -146,7 +145,7 @@ private fun GardenListItem(
                 contentDescription = plant.plant.description,
                 Modifier
                     .fillMaxWidth()
-                    .height(dimensionResource(id = R.dimen.plant_item_image_height)),
+                    .height(95.dp),
                 contentScale = ContentScale.Crop,
             )
 
