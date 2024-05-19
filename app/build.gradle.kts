@@ -30,6 +30,11 @@ kotlin {
   sourceSets {
     commonMain {
       dependencies {
+        implementation(compose.ui)
+        implementation(compose.foundation)
+        implementation(compose.material3)
+        implementation(compose.uiTooling)
+        implementation(compose.preview)
       }
     }
     androidMain {
@@ -57,13 +62,7 @@ kotlin {
         // Compose
         implementation(libs.androidx.activity.compose)
         implementation(libs.androidx.constraintlayout.compose)
-        implementation(libs.androidx.compose.runtime)
-        implementation(libs.androidx.compose.ui)
-        implementation(libs.androidx.compose.foundation)
-        implementation(libs.androidx.compose.foundation.layout)
-        implementation(libs.androidx.compose.material3)
         implementation(libs.androidx.compose.ui.viewbinding)
-        implementation(libs.androidx.compose.ui.tooling.preview)
         implementation(libs.androidx.lifecycle.viewmodel.compose)
         implementation(libs.accompanist.systemuicontroller)
         implementation(libs.coil.compose)
@@ -73,7 +72,6 @@ kotlin {
     @OptIn(ExperimentalKotlinGradlePluginApi::class)
     invokeWhenCreated("androidDebug") {
       dependencies {
-        implementation(libs.androidx.compose.ui.tooling)
         implementation(libs.androidx.monitor)
       }
     }
