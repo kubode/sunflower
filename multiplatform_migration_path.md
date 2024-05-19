@@ -12,7 +12,7 @@ https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-
 - [x] Migrate `:app` to Multiplatform project f890cce01644a25e6b31aefa26324ae3cc4c9993
     - [x] Apply `kotlin-multiplatform` plugin with fixing the dependencies
     - [x] Rename all `java` directories to `kotlin`
-- [ ] Migrate `:app` to use Compose Multiplatform
+- [x] Migrate `:app` to use Compose Multiplatform d725d1b095a5886e298d95bdc5077008bc630edf
     - [x] Migrate DataBinding to ViewBinding cccc98e043efaca982b448f2646e6b68ec620b47
     - [x] Migrate LiveData to Flow c63ec96c577f53df12ffd2ae35493f15fde33fe1
 - [ ] Migrate `res` files with Multiplatform Resources
