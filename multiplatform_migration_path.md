@@ -19,7 +19,7 @@ https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-
     - [x] Migrate LiveData to Flow c63ec96c577f53df12ffd2ae35493f15fde33fe1
 - [x] Migrate `res` files with Multiplatform Resources 1333850dfaa5fd438d329a32182c40a9ef25c827...9aa0101e2dcdce2f358f025d05f893a4e75b3deb
     - [Limitations](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-images-resources.html)
-- [ ] Migrate Navigation to [Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html#setup)
+- [x] Migrate Navigation to [Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html#setup) 33b42bd87e377884c45a55602b1e906f13ebd489
 - [ ] Add iOS target
 - [ ] Move shareable `androidMain` codes to `commonMain`
     - [ ] Migrate the remaining non-migratable Android-specific code and libraries
