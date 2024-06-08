@@ -36,13 +36,13 @@ kotlin {
         implementation(compose.uiTooling)
         implementation(compose.preview)
         implementation(compose.components.resources)
+        implementation(libs.navigation.compose)
       }
     }
     androidMain {
       dependencies {
         implementation(libs.androidx.core.ktx)
         implementation(libs.androidx.lifecycle.viewmodel.ktx)
-        implementation(libs.androidx.navigation.compose)
         implementation(libs.androidx.paging.compose)
         implementation(libs.androidx.room.ktx)
         implementation(libs.androidx.work.runtime.ktx)
